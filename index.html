@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مدونة الأحكام الشرعية – الأحوال الشخصية (الجعفري)</title>
+<style>
+:root{--bg:#f6f3ec;--card:#fff;--tx:#222;--mu:#777;--ac:#0f6b5c;--hl:#ffe27a;--bd:#e3ddd0}
+[data-t=d]{--bg:#14181a;--card:#1d2326;--tx:#e8e6e1;--mu:#99a;--ac:#4cc3ad;--hl:#6b5b00;--bd:#2c3438}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:calc(17px*var(--fs,1))/1.9 "Amiri","Noto Naskh Arabic",Tahoma,serif}
+header{position:sticky;top:0;z-index:5;background:var(--ac);color:#fff;padding:8px 12px;box-shadow:0 2px 6px #0003}
+.r{display:flex;gap:6px;align-items:center;flex-wrap:wrap}h1{font-size:1.05em;margin:0;flex:1}
+button,select{font:inherit;font-size:.85em;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:8px;padding:2px 9px;cursor:pointer}
+header button{background:#ffffff22;color:#fff;border-color:#fff4}
+#q{flex:1;min-width:0;width:100%;font:inherit;padding:7px 12px;border-radius:10px;border:0;margin-top:6px}
+main{display:flex;max-width:1150px;margin:auto}nav{width:270px;padding:10px;font-size:.85em;position:sticky;top:96px;align-self:flex-start;max-height:calc(100vh - 110px);overflow:auto}
+nav a{display:block;padding:3px 8px;color:var(--tx);text-decoration:none;border-radius:6px;cursor:pointer}nav a:hover{background:var(--bd)}nav .b{font-weight:700;color:var(--ac);margin-top:8px}
+section{flex:1;padding:10px;min-width:0}.chips span{display:inline-block;background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:0 11px;margin:2px;cursor:pointer;font-size:.85em}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px 14px;margin:10px 0}.card.f{animation:f 2s}@keyframes f{from{background:var(--hl)}}
+.h{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.n{background:var(--ac);color:#fff;border-radius:8px;padding:0 10px;font-weight:700}.c{color:var(--mu);font-size:.75em;flex:1}
+.t{margin:6px 0;text-align:justify}.a{display:flex;gap:5px;flex-wrap:wrap}.a button{font-size:.75em}mark{background:var(--hl);color:inherit;border-radius:3px}.x{color:var(--ac);cursor:pointer;text-decoration:underline dotted}
+.sep{margin:22px 0 4px;color:var(--ac);font-weight:700;border-bottom:2px solid var(--ac)}#st{color:var(--mu);font-size:.85em;margin:6px 2px}iframe{width:100%;height:80vh;border:1px solid var(--bd);border-radius:10px}
+@media(max-width:800px){nav{display:none;position:fixed;inset:96px 0 0 0;width:auto;max-height:none;background:var(--bg);z-index:4}nav.o{display:block}}
+@media print{header,nav,.a,.chips{display:none}}
+</style></head><body>
+<header><div class="r"><h1>📖 مدونة الأحكام الشرعية – الأحوال الشخصية (المذهب الجعفري)</h1>
+<button id="bm">☰ الفهرس</button><button id="fs1">أ+</button><button id="fs0">أ−</button><button id="th">🌙</button></div>
+<input id="q" type="search" placeholder="ابحث: كلمة، عبارة بين «…»، رقم مادة (136)، أو حتى بأخطاء إملائية…" autocomplete="off"></header>
+<main><nav id="nv"></nav><section>
+<div class="r"><select id="bb"><option value="">كل الأبواب</option></select><button id="all">📚 الكل</button><button id="fv">⭐ المحفوظات</button><button id="pd">📄 ملف PDF</button><a href="code.pdf" download style="color:var(--ac);font-size:.85em">⬇ تحميل</a></div>
+<div class="chips" id="ch"></div><div id="st"></div><div id="out"></div></section></main>
+<script src="data.js"></script><script>
+const $=i=>document.getElementById(i),E=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const norm=s=>s.normalize('NFKC').replace(/[\u064b-\u0652\u0670\u0640]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/ؤ/g,'و').replace(/ئ/g,'ي').replace(/[٠-٩]/g,d=>d.charCodeAt(0)-1632);
+function idx(s){let k='',p=[];for(let i=0;i<s.length;i++){const n=norm(s[i]);if(/^[ء-ي0-9]$/.test(n)){k+=n;p.push(i)}}return{k,p}}
+ARTS.forEach(a=>{a.i=idx(a.t);a.ck=idx(a.c).k;a.b=a.c.split(' › ')[0]});
+const SY=[['ميراث','ارث','وراثه','تركه'],['زوجه','امراه'],['مهر','صداق'],['طلاق','تطليق'],['حضانه','رعايه'],['نفقه','انفاق'],['وصيه','موصي'],['خلع','فديه','مباراه'],['زواج','نكاح','عقد']];
+const syn=k=>{for(const g of SY)if(g.includes(k))return g;return[k]};
+let fav=JSON.parse(localStorage.getItem('fav')||'[]'),mode='all';
+function lev(a,b){const m=a.length,n=b.length;let d=Array.from({length:n+1},(_,j)=>j),r=0;let best=9;for(let i=1;i<=m;i++){let pr=d[0];d[0]=0;for(let j=1;j<=n;j++){const t=d[j];d[j]=Math.min(d[j]+1,d[j-1]+1,pr+(a[i-1]==b[j-1]?0:1));pr=t}}return d[n]}
+function fz(k,t){const L=t.length,ed=L>=9?2:1;let m=[];for(let i=0;i+L-1<=k.length;i++)for(const w of[L-1,L,L+1]){if(w<3||i+w>k.length)continue;if(k[i]!=t[0]&&k[i+1]!=t[0])continue;if(lev(t,k.substr(i,w))<=ed){m.push([i,i+w]);i+=w-1;break}}return m}
+function find(k,t,fuzzy){let r=[],i=-1;for(const v of syn(t))for(let j=-1;(j=k.indexOf(v,j+1))>=0;)r.push([j,j+v.length]);return !r.length&&fuzzy&&t.length>=4?fz(k,t):r}
+function search(q,list){const T=[];q.replace(/["«]([^"»]+)["»]|(\S+)/g,(_,p,w)=>{let k=idx(p||w).k;if(k.length>4&&k.startsWith('ال'))k=k.slice(2);if(k)T.push(k)});if(!T.length)return null;let res=[];
+for(const fuzzy of[0,1]){for(const any of[0,1]){res=[];for(const a of list){let sc=0,rg=[],ok=0;for(const t of T){const m=find(a.i.k,t,fuzzy),c=a.ck.includes(t);if(m.length||c){ok++;sc+=Math.min(m.length,5)*3+(c?4:0)+(a.i.k.length<400?2:0);rg.push(...m)}}
+if(any?ok:ok==T.length){if(T.length>1&&ok==T.length){const s=rg.map(x=>x[0]).sort((x,y)=>x-y);if(s[s.length-1]-s[0]<150)sc+=6}res.push({a,sc,rg})}}
+if(res.length)return{res:res.sort((x,y)=>y.sc-x.sc),T,note:(any?'نتائج جزئية (تحتوي بعض الكلمات)':'')+(fuzzy?' • مطابقة تقريبية':'')}}}return{res:[],T}}
+function ref(h){return h.replace(/(المواد?\s*)(\(?\s*)(\d{1,3}|[٠-٩]{1,3})(\s*\)?)/g,(m,a,b,n,c)=>`${a}<span class="x" data-g="${norm(n)}">${b}${n}${c}</span>`)}
+function body(a,rg){let r=rg.map(x=>[a.i.p[x[0]],a.i.p[x[1]-1]+1]).sort((x,y)=>x[0]-y[0]),m=[];for(const x of r){const l=m[m.length-1];if(l&&x[0]<=l[1]+1)l[1]=Math.max(l[1],x[1]);else m.push([...x])}
+let o='',p=0;for(const[s,e]of m){o+=ref(E(a.t.slice(p,s)))+'<mark>'+E(a.t.slice(s,e))+'</mark>';p=e}return o+ref(E(a.t.slice(p)))}
+function card(a,rg=[]){const f=fav.includes(a.n);return`<div class="card" id="m${a.n}"><div class="h"><span class="n">${a.n?'المادة '+a.n:'القرار'}</span><span class="c">${E(a.c)} • صفحة ${a.p}</span></div><div class="t">${body(a,rg)}</div><div class="a"><button data-c="${a.n}">📋 نسخ</button><button data-s="${a.n}">🔗 رابط</button><button data-f="${a.n}">${f?'★ محفوظة':'☆ حفظ'}</button><button data-p="${a.p}">📄 الصفحة في PDF</button></div></div>`}
+function show(list,note){let h='',last='';for(const a of list){const c=a.c;if(!note&&c!=last){h+=`<div class="sep">${E(c)}</div>`;last=c}h+=card(a)}$('out').innerHTML=h;$('st').textContent=note||''}
+function render(){const q=$('q').value.trim(),b=$('bb').value;let L=ARTS.filter(a=>!b||a.b==b);if(mode=='fav')L=L.filter(a=>fav.includes(a.n));
+if(mode=='pdf'){$('out').innerHTML='<iframe src="code.pdf"></iframe>';$('st').textContent='';return}
+if(!q){show(L,'');$('st').textContent=(mode=='fav'?'المحفوظات: ':'')+L.length+' مادة';return}
+const num=q.match(/^(?:م|مادة|المادة)?\s*\(?\s*([\d٠-٩]{1,3})\s*\)?$/);if(num){const n=+norm(num[1]),a=ARTS.find(x=>x.n==n);if(a){$('out').innerHTML=card(a);$('st').textContent='انتقال مباشر للمادة '+n;return}}
+const r=search(q,L);if(!r||!r.res.length){$('out').innerHTML='<p>لا توجد نتائج. جرّب كلمات أقل أو أبسط.</p>';$('st').textContent='';return}
+$('out').innerHTML=r.res.map(x=>card(x.a,x.rg)).join('');$('st').textContent=r.res.length+' نتيجة'+(r.note?' — '+r.note:'')}
+function go(n){$('q').value='';mode='all';$('bb').value='';render();const e=$('m'+n);if(e){e.scrollIntoView({block:'center'});e.classList.add('f');setTimeout(()=>e.classList.remove('f'),2200)}}
+let tm;$('q').oninput=()=>{clearTimeout(tm);tm=setTimeout(render,150)};$('bb').onchange=render;
+$('all').onclick=()=>{mode='all';$('q').value='';render()};$('fv').onclick=()=>{mode='fav';render()};$('pd').onclick=()=>{mode='pdf';render()};
+$('out').onclick=e=>{const t=e.target,d=t.dataset;if(d.g)go(+d.g);if(d.c){const a=ARTS.find(x=>x.n==d.c);navigator.clipboard.writeText((a.n?'المادة '+a.n+': ':'')+a.t+'\n— '+a.c);t.textContent='✓ تم'}
+if(d.s){const u=location.href.split('#')[0]+'#m'+d.s;navigator.clipboard.writeText(u);t.textContent='✓ نُسخ الرابط'}
+if(d.f){const n=+d.f;fav=fav.includes(n)?fav.filter(x=>x!=n):[...fav,n];localStorage.setItem('fav',JSON.stringify(fav));t.textContent=fav.includes(n)?'★ محفوظة':'☆ حفظ'}
+if(d.p)window.open('code.pdf#page='+d.p,'_blank')};
+const bs=[...new Set(ARTS.map(a=>a.b))];bs.forEach(b=>$('bb').add(new Option(b,b)));
+let nh='',pb='',pc='';for(const a of ARTS){const[b,c]=a.c.split(' › ');if(b!=pb){nh+=`<a class="b" data-n="${a.n}">${E(b)}</a>`;pb=b;pc=''}if(c&&c!=pc){nh+=`<a data-n="${a.n}">${E(c)}</a>`;pc=c}}$('nv').innerHTML=nh;
+$('nv').onclick=e=>{if(e.target.dataset.n!=null){$('nv').classList.remove('o');go(+e.target.dataset.n)}};$('bm').onclick=()=>$('nv').classList.toggle('o');
+$('ch').innerHTML=['الحضانة','الميراث','الخلع','المهر','العدة','الوصية','النفقة','النشوز','الرضاع','المفقود','"الولاية"'].map(w=>`<span>${w}</span>`).join('');$('ch').onclick=e=>{if(e.target.tagName=='SPAN'){$('q').value=e.target.textContent;mode='all';render()}};
+let fs=+localStorage.fs||1;const sf=()=>{document.body.style.setProperty('--fs',fs);localStorage.fs=fs};sf();$('fs1').onclick=()=>{fs=Math.min(1.6,fs+.1);sf()};$('fs0').onclick=()=>{fs=Math.max(.8,fs-.1);sf()};
+const dk=()=>{document.documentElement.dataset.t=localStorage.t||'l'};dk();$('th').onclick=()=>{localStorage.t=localStorage.t=='d'?'l':'d';dk()};
+render();if(/^#m\d+/.test(location.hash))setTimeout(()=>go(+location.hash.slice(2)),50);
+</script></body></html>
